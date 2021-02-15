@@ -2,30 +2,43 @@ import "./styles.css";
 
 const onClickAdd = () => {
   const inputText = document.getElementById("add-text").value;
-  document.getElementById("add-text").value = null;
-  //divタグの生成
-  const div = document.createElement("div");
-  div.className = "list-row"; //プロパティadd class
+  if (!inputText == false) {
+    document.getElementById("add-text").value = null;
+    //divタグの生成
+    const div = document.createElement("div");
+    div.className = "list-row"; //プロパティadd class
 
-  //li タグ
-  const li = document.createElement("li");
-  li.innerText = inputText; //プロパティ　入力内容　add
-  console.log(li);
+    //li タグ
+    const li = document.createElement("li");
+    li.innerText = inputText; //プロパティ　入力内容　add
+    console.log(li);
 
-  //button
-  const btn1 = document.createElement("button");
-  btn1.innerText = "done";
-  const btn2 = document.createElement("button");
-  btn2.innerText = "delete";
+    //button
+    const doneBtn = document.createElement("button");
+    doneBtn.innerText = "done";
+    doneBtn.addEventListener("click", () => {
+      alert("done!!");
+    });
 
-  //divの中にliとかを入れる
-  div.appendChild(li);
-  div.appendChild(btn1);
-  div.appendChild(btn2);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "delete";
+    deleteBtn.addEventListener("click", () => {
+      // alert("delete");
+      //消す処理 押されたボタンの親タグを未完から削除
+      const deleteTarget = deleteBtn.parentNode;
+      document.getElementById("imcomplete-list").removeChild(deleteTarget);
+      console.log(deleteTarget);
+    });
 
-  //未完了のリストに追加
-  document.getElementById("incomplete-list").appendChild(div);
-  console.log(div);
+    //divの中にliとかを入れる
+    div.appendChild(li);
+    div.appendChild(doneBtn);
+    div.appendChild(deleteBtn);
+
+    //未完了のリストに追加
+    document.getElementById("imcomplete-list").appendChild(div);
+    console.log(div);
+  }
   // alert(inputText);
 };
 
